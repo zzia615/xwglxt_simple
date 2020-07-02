@@ -1,0 +1,82 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainSite.master.cs" Inherits="xwglxt.MainSite" %>
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title><%= WebData.CurrentMenu+"-"+WebData.SystemTitle %></title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="Content/bootstrap.css">
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <nav class="navbar-expand-md navbar navbar-dark bg-primary">
+      <a class="navbar-brand" href="#"><%=WebData.SystemTitle %></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <%--<li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>--%>
+        </ul>
+        <ul class="navbar-nav my-2">
+          <li class="nav-item">            
+            <a class="nav-link disabled active" href="#" tabindex="-1" aria-disabled="true">欢迎【<%=Session[WebData.登录用户名] %>】登录</a>
+          </li>
+          <li class="nav-item">            
+            <a class="nav-link" href="Login.aspx">退出</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="list-group">
+                  <%foreach(var data in WebData.SysMenu){ %>
+                  <%if (WebData.CurrentMenu == data.Key){ %>
+                  <a class="list-group-item list-group-item-action active" href="<%=data.Value %>"><%=data.Key %></a> 
+                  <%}else {%>
+                  <a class="list-group-item list-group-item-action" href="<%=data.Value %>"><%=data.Key %></a> 
+                  <%} %>
+                  <%} %>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="mt-2">
+                    <h2><%=WebData.CurrentMenu %></h2>
+                    <hr />
+                </div>
+                <form runat="server">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="Scripts/jquery-3.0.0.js"></script>
+    <script src="Scripts/popper.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+</body>
+</html>
